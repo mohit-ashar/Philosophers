@@ -77,7 +77,7 @@ void        *monitoring(void *vp)
     while (1)
     {
         pthread_mutex_lock(&gl->eats[p->p_no]);
-        if (get_current_time() - p->last_eat_time > (unsigned)gl->time_to_die)
+        if (get_current_time() - p->last_eat_time > (unsigned long)gl->time_to_die)
         {
 			print_status(gl, p, DIED);
 			pthread_mutex_lock(&gl->someone_died);
@@ -98,5 +98,19 @@ int         main(int ac, char **av)
         exit(1);
     if (init_global(gl) || create_philo(gl))
         return (free_all(1));
-    return (0);
+    while(1)
+    {
+        pthread_mutex_lock(&gl->alive);
+		if (gl->num_alive == 0)
+			break ;
+		pthread_mutex_unlock(&gl->alive);
+        pthread_mutex_lock(&gl->someone_died);
+		if (gl->flag_died)
+			return (EXIT_SUCCESS);
+		pthread_mutex_unlock(&gl->someone_died);
+        usleep(1000);
+    }
+    if (!gl->flag_died)
+		ft_putstr_fd("Every philosopher eat enough!\n", 1);
+    return (free_all(0));
 }

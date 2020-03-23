@@ -4,7 +4,7 @@ unsigned    long    get_current_time()
 {
     struct timeval tv;
     if (gettimeofday(&tv, NULL))
-        return (1);
+        return (0);
     return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 

@@ -48,14 +48,26 @@ char    *construct_line(char *ts, char *sp, char *index, char *action)
     i = 0;
     while (action[i])
         buffer = ft_stradd(buffer, action[i++]);
+    ft_free(&ts);
+    ft_free(&sp);
+    ft_free(&index);
+    ft_free(&action);
     return (buffer);
 }
 
-void    print_line(char *str, t_global *gl)
+void    print_line(char *str, t_global *gl, t_status status)
 {
-    pthread_mutex_lock(&gl->print);
-    ft_putstr(str);
-    pthread_mutex_unlock(&gl->print);
+    pthread_mutex_lock(&gl->someone_died);
+	if (gl->flag_died)
+	{
+		pthread_mutex_unlock(&gl->someone_died);
+		return ;
+	}
+	pthread_mutex_unlock(&gl->someone_died);
+	pthread_mutex_lock(&gl->print);
+	ft_putstr_fd(str, 1);
+	if (!(status == DIED))
+		pthread_mutex_unlock(&gl->print);
     ft_free(&str);
 }
 
@@ -67,19 +79,19 @@ void    print_status(t_global *gl, t_philo *p, t_status status)
     char *action;
     unsigned long time;
 
-    time = get_current_time();
+    time = get_current_time() - p->start_time;
     timestamp = ft_itoa(time);
     space = ft_strdup(" ");
     p_num = ft_itoa(p->p_no + 1);
     if (status == THINKING)
         action = ft_strdup(" is thinking\n");
-    if (status == EATING)
+    else if (status == EATING)
         action = ft_strdup(" is eating\n");
-    if (status == SLEEPING)
+    else if (status == SLEEPING)
         action = ft_strdup(" is sleeping\n");
-    if (status == FORK_TAKEN)
+    else if (status == FORK_TAKEN)
         action = ft_strdup(" has taken a fork\n");
-    if (status == DIED)
+    else if (status == DIED)
         action = ft_strdup(" died\n");
-    print_line(construct_line(timestamp, space, p_num, action), gl);
+    print_line(construct_line(timestamp, space, p_num, action), gl, status);
 }

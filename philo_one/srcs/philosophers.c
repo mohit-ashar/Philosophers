@@ -4,7 +4,7 @@ static int  taken_fork_and_eat(t_global *gl, t_philo *p)
     pthread_mutex_lock(&gl->pickup);
     pthread_mutex_lock(&gl->forks[p->p_no]);
    	print_status(gl, p, FORK_TAKEN);
-    pthread_mutex_lock((&gl->forks[p->p_no % gl->n_philo]));
+    pthread_mutex_lock((&gl->forks[(p->p_no + 1) % gl->n_philo]));
     print_status(gl, p, FORK_TAKEN);
     pthread_mutex_unlock(&gl->pickup);
     pthread_mutex_lock(&gl->eats[p->p_no]);
@@ -34,6 +34,7 @@ static void *philosophing(void *vp)
         if ((taken_fork_and_eat(gl, p)))
 			break ;
 		print_status(gl, p, SLEEPING);
+        usleep(gl->time_to_sleep * 1000);
     }
     pthread_mutex_lock(&gl->alive);
     gl->num_alive--;
@@ -52,6 +53,7 @@ int         create_philo_even(t_global *gl)
         gl->philo[j].p_no = j;
         gl->philo[j].num_eat = 0;
         gl->philo[j].start_time = get_current_time();
+        gl->philo[j].last_eat_time = gl->philo[j].start_time;
         if (pthread_create(&gl->philo[j].thread, NULL, &philosophing, &gl->philo[j]))
             return(str_err("Error: cannot create pthread", 1));
         if (pthread_detach(gl->philo[j].thread))
@@ -77,6 +79,7 @@ int         create_philo_odd(t_global *gl)
         gl->philo[j].p_no = j;
         gl->philo[j].num_eat = 0;
         gl->philo[j].start_time = get_current_time();
+		gl->philo[j].last_eat_time = gl->philo[j].start_time;
         if (pthread_create(&gl->philo[j].thread, NULL,
         &philosophing, &gl->philo[j]))
             return(str_err("Error: cannot create pthread", 1));
