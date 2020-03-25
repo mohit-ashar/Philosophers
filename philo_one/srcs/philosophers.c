@@ -62,7 +62,7 @@ int         create_philo_even(t_global *gl)
             return(str_err("Error: cannot create mthread", 1));
         if (pthread_detach(gl->philo[j].m_thread))
             return(str_err("Error: cannot detach mthread", 1));      
-        usleep(20);
+        // usleep(20);
         i++;
     }
     return (0);
@@ -90,7 +90,7 @@ int         create_philo_odd(t_global *gl)
             return(str_err("Error: cannot create mthread", 1));
         if (pthread_detach(gl->philo[j].m_thread))
             return(str_err("Error: cannot detach mthread", 1));      
-        usleep(20);
+        // usleep(20);
         i++;
     }
     return (0);
@@ -101,9 +101,9 @@ int         create_philo(t_global *gl)
 {
     if (!(gl->philo = malloc(sizeof(t_philo) * gl->n_philo)))
         return (str_err("Error: thread malloc failed", 1));
-    if (create_philo_odd(gl))
-        return (1);
     if (create_philo_even(gl))
+        return (1);
+    if (create_philo_odd(gl))
         return (1);
     return (0);
 }

@@ -13,6 +13,7 @@
 BINARY = philo_one
 
 COMP = gcc -Wall -Wextra -fsanitize=address -g3
+# COMP = gcc -Wall -Wextra -g3
 INCLUDES = -Iincludes
 SRC := $(wildcard srcs/*.c)
 OBJ := $(patsubst srcs/%.c, obj/%.o, $(SRC))

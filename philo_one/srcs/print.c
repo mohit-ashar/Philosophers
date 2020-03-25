@@ -37,16 +37,16 @@ char    *construct_line(char *ts, char *sp, char *index, char *action)
 
     buffer = 0;
     i = 0;
-    while (ts[i])
+    while (ts[i] != '\0')
         buffer = ft_stradd(buffer, ts[i++]);
     i = 0; 
-    while (sp[i])
+    while (sp[i] != '\0') 
         buffer = ft_stradd(buffer, sp[i++]);
     i = 0;
-    while (index[i])
+    while (index[i] != '\0')
         buffer = ft_stradd(buffer, index[i++]);
     i = 0;
-    while (action[i])
+    while (action[i] != '\0')
         buffer = ft_stradd(buffer, action[i++]);
     ft_free(&ts);
     ft_free(&sp);
@@ -61,6 +61,7 @@ void    print_line(char *str, t_global *gl, t_status status)
 	if (gl->flag_died)
 	{
 		pthread_mutex_unlock(&gl->someone_died);
+        ft_free(&str);
 		return ;
 	}
 	pthread_mutex_unlock(&gl->someone_died);
