@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/13 10:50:16 by user42            #+#    #+#             */
+/*   Updated: 2020/04/13 10:50:20 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
-int     str_err(char *err_msg, int ret)
+int		str_err(char *err_msg, int ret)
 {
-    ft_putstr_fd(err_msg, 2);
-    return (ret);
+	ft_putstr_fd(err_msg, 2);
+	return (ret);
 }

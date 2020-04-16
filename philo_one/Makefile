@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vparekh <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 12:43:24 by vparekh           #+#    #+#              #
-#*   Updated: 2020/03/02 17:54:08 by                  ###   ########.fr       *#
+#    Updated: 2020/04/13 12:24:55 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 BINARY = philo_one
 
-COMP = gcc -Wall -Wextra -fsanitize=address -g3
-# COMP = gcc -Wall -Wextra -g3
+# COMP = gcc -Wall -Wextra -fsanitize=address -g3
+COMP = gcc -Wall -Wextra -g3
 INCLUDES = -Iincludes
 SRC := $(wildcard srcs/*.c)
 OBJ := $(patsubst srcs/%.c, obj/%.o, $(SRC))
