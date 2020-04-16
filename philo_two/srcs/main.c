@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 13:08:15 by user42            #+#    #+#             */
-/*   Updated: 2020/04/16 10:17:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/16 16:10:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void				*monitoring(void *vp)
 		}
 		if ((sem_post(gl->eat) == -1))
 			str_error("error: sem_wait\n", 1);
-		ft_usleep(100);
+		ft_usleep(5);
 	}
 	return (p);
 }
@@ -87,7 +87,7 @@ int					main(int ac, char **av)
 			return (ft_unlink(1));
 		if ((sem_post(gl->died) == -1))
 			return (str_error("error: sem_post\n", 1));
-		ft_usleep(100);
+		ft_usleep(5);
 	}
 	if (!(gl->died_flag))
 		str_error("philosophers eat enough!\n", 0);

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/13 18:29:23 by user42            #+#    #+#             */
+/*   Updated: 2020/04/13 18:31:05 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
-void ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-    int len;
+	int len;
 
-    len = ft_strlen(str);
-    write(1, str, len);
-    return ;
+	len = ft_strlen(str);
+	write(1, str, len);
+	return ;
 }

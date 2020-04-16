@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 13:13:59 by user42            #+#    #+#             */
-/*   Updated: 2020/04/16 10:24:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/16 15:25:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int				create_even_philo(t_global *gl, unsigned long start_time)
 			return (1);
 		if ((pthread_detach(gl->philo[j].m_thread)))
 			return (1);
-		usleep(20);
 		i++;
 	}
 	return (0);
@@ -113,7 +112,6 @@ int				create_odd_philo(t_global *gl, unsigned long start_time)
 			return (1);
 		if ((pthread_detach(gl->philo[j].m_thread)))
 			return (1);
-		usleep(20);
 		i++;
 	}
 	return (0);

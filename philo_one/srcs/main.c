@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 11:13:45 by user42            #+#    #+#             */
-/*   Updated: 2020/04/16 09:32:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/16 15:53:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void			*monitoring(void *vp)
 			pthread_mutex_unlock(&gl->someone_died);
 		}
 		pthread_mutex_unlock(&gl->eats[p->p_no]);
-		ft_usleep(100);
+		ft_usleep(5);
 	}
 }
 
@@ -114,7 +114,7 @@ int				main(int ac, char **av)
 		if (gl->flag_died)
 			return (EXIT_SUCCESS);
 		pthread_mutex_unlock(&gl->someone_died);
-		ft_usleep(100);
+		ft_usleep(5);
 	}
 	if (!gl->flag_died)
 		ft_putstr_fd("Every philosopher eat enough!\n", 1);
